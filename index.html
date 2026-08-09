@@ -114,7 +114,6 @@ body::after {
   margin-bottom: 12px;
   letter-spacing: 1px;
 }
-/* 登录页面系统介绍 */
 .system-desc {
   color: #cbd5e1;
   font-size: 13px;
@@ -503,7 +502,6 @@ input::placeholder {
 .count-row {background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);}
 .pay-row{background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.25);}
 
-/* 弹窗 */
 .modal-box {
   display: none;
   position: fixed;
@@ -548,23 +546,72 @@ input::placeholder {
   border-radius:10px;
   cursor:pointer;
 }
-/* 个人中心弹窗 */
+
+/* 个人中心弹窗样式 */
 .center-modal {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
   z-index:9999;
+  backdrop-filter: blur(6px);
 }
 .center-content {
   width:90%;
-  max-width:500px;
-  margin:10vh auto;
+  max-width:540px;
+  margin:8vh auto;
   padding:30px;
   border-radius:20px;
   background:#101528;
   border:1px solid rgba(100,160,255,0.2);
   color:#fff;
+}
+.center-head-info{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:24px;
+  padding-bottom:16px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.center-avatar{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#60a5fa,#8b5cf6);
+  display:grid;
+  place-items:center;
+  font-size:26px;
+}
+.center-menu-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.center-menu-btn{
+  padding:14px 10px;
+  border-radius:14px;
+  background:rgba(80,140,255,0.05);
+  border:1px solid rgba(100,160,255,0.14);
+  color:#e2e8f0;
+  text-align:center;
+  cursor:pointer;
+  transition:0.25s;
+}
+.center-menu-btn:hover{
+  background:rgba(80,140,255,0.12);
+  transform:translateY(-2px);
+}
+.close-center-btn{
+  width:100%;
+  padding:10px;
+  border-radius:12px;
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  cursor:pointer;
+  font-size:15px;
 }
 </style>
 </head>
@@ -577,7 +624,6 @@ input::placeholder {
       <h1 class="title">液态玻璃高端购物系统</h1>
       <p class="title-sub">LIQUID GLASS SHOP SYSTEM</p>
 
-      <!-- 新增系统介绍 -->
       <div class="system-desc">
         本系统为轻量化商品管理演示平台，支持会员登录、游客临时操作、商品录入、订单结算、积分统计功能。界面采用液态毛玻璃风格，操作简洁直观，数据本地临时存储。
       </div>
@@ -604,7 +650,6 @@ input::placeholder {
           <a class="forgot-pwd">忘记密码？</a>
         </div>
         <button class="click-btn login-btn" id="loginSubmit">会员登录</button>
-        <!-- 修复游客按钮点击事件 -->
         <button class="click-btn guest-btn" id="guestBtn">游客临时访问</button>
       </div>
 
@@ -660,7 +705,6 @@ input::placeholder {
   <div class="admin-container" id="adminPanel">
     <div class="user-panel glass-liquid" id="userPanelBox">
       <div class="user-head">
-        <!-- 头像绑定点击打开个人中心 -->
         <div class="avatar" id="avatarClick">A<span class="msg-badge">3</span></div>
         <div>
           <div class="username">欢迎你，<span id="showName">管理员</span></div>
@@ -673,7 +717,7 @@ input::placeholder {
     </div>
     <div class="func-group">
       <button class="func-btn clear-goods" id="clearCart">清空购物车</button>
-      <button class="func-btn log-btn">操作日志</button>
+      <button class="func-btn log-btn" onclick="showLog()">操作日志</button>
       <button class="func-btn logout" id="logoutBtn">退出登录</button>
     </div>
     <div class="shop-card glass-liquid">
@@ -681,184 +725,36 @@ input::placeholder {
       <div id="goodsBox"></div>
       <div class="oper-row">
         <button class="add-row" id="addGoods">新增商品条目</button>
-        <button class="count-row">统计库存总额</button>
-        <button class="pay-row">确认结账结算</button>
+        <button class="count-row" onclick="calcStock()">统计库存总额</button>
+        <button class="pay-row" onclick="checkoutPay()">确认结账结算</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 个人中心弹窗 -->
+<!-- 个人中心弹窗，完整功能菜单 -->
 <div class="center-modal" id="userCenterModal">
   <div class="center-content glass-liquid">
-    <h2>个人中心</h2>
-    <p style="margin:15px 0;">账号信息、积分明细、优惠券、收货地址均可在此管理</p>
-    <button onclick="closeCenter()" style="margin-top:20px;padding:8px 20px;border:none;border-radius:10px;background:#3b82f6;color:#fff;cursor:pointer;">关闭</button>
+    <div class="center-head-info">
+      <div class="center-avatar">U</div>
+      <div>
+        <h2>个人中心</h2>
+        <p style="color:#94a3b8;margin-top:4px;">账号管理与个人服务</p>
+      </div>
+    </div>
+    <div class="center-menu-grid">
+      <div class="center-menu-btn" onclick="tip('打开个人资料修改')">👤 个人资料修改</div>
+      <div class="center-menu-btn" onclick="tip('打开我的订单页面')">📋 我的订单</div>
+      <div class="center-menu-btn" onclick="tip('打开积分明细')">✨ 积分明细</div>
+      <div class="center-menu-btn" onclick="tip('查看我的优惠券')">🎫 我的优惠券</div>
+      <div class="center-menu-btn" onclick="tip('收货地址管理')">📍 收货地址</div>
+      <div class="center-menu-btn" onclick="tip('消息通知列表')">🔔 消息通知</div>
+      <div class="center-menu-btn" onclick="tip('修改登录密码')">🔐 修改密码</div>
+      <div class="center-menu-btn" onclick="tip('账号安全设置')">🛡️ 安全设置</div>
+    </div>
+    <button class="close-center-btn" onclick="closeCenter()">关闭个人中心</button>
   </div>
 </div>
 
 <div class="modal-box" id="modalUser">
-  <div class="modal-inner">
-    <h2>用户协议</h2>
-    <p>欢迎访问本液态玻璃高端购物系统，在使用本站全部服务前，请仔细阅读本协议全部条款，使用即代表同意约束。</p>
-    <h3>一、服务说明</h3>
-    <p>本网站为线上购物演示系统，提供商品浏览、下单、积分、优惠券等基础功能，仅供正常合规使用，禁止商用违规操作。</p>
-    <h3>二、账号注册与保管</h3>
-    <p>1.注册账号请填写真实合规信息，禁止冒用他人身份；
-    <br>2.账号密码由使用者自行保管，账号下所有操作责任由账号持有人承担；
-    <br>3.禁止转借、出售、共享账号，违规平台可限制账号权限。</p>
-    <h3>三、用户行为规范</h3>
-    <p>禁止发布辱骂、色情、造谣、违法内容；禁止爬虫批量刷取、恶意攻击网站；一旦违规，平台有权封禁账号并保留追责权利。</p>
-    <h3>四、交易与积分规则</h3>
-    <p>积分、优惠券仅限平台内抵扣使用，不可兑换现金；活动规则平台可合理调整，调整后页面公示生效。</p>
-    <h3>五、免责声明</h3>
-    <p>本站为演示项目，不承诺服务永久不间断；因用户自身操作失误、网络环境问题造成损失，由用户自行承担。</p>
-    <h3>六、协议更新</h3>
-    <p>平台可随时修订协议内容，页面更新展示后立即生效，持续使用代表接受新版协议。</p>
-    <div class="modal-close">
-      <button onclick="closeUserAgreement()">我已阅读，关闭</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-box" id="modalPrivacy">
-  <div class="modal-inner">
-    <h2>隐私政策</h2>
-    <p>我们高度重视你的个人信息隐私安全，本政策说明信息收集、使用、保护全部规则。</p>
-    <h3>1.信息收集范围</h3>
-    <p>仅收集你主动填写的账号、密码、收货信息；不会私自获取相册、通讯录、定位等设备隐私权限。</p>
-    <h3>2.信息使用用途</h3>
-    <p>收集数据仅用于登录验证、订单处理、积分发放，不会倒卖、共享给第三方推广机构。</p>
-    <h3>3.数据安全防护</h3>
-    <p>平台采用基础加密防护存储信息，但互联网无法做到绝对安全，请勿填写高度敏感私密信息。</p>
-    <h3>4.信息披露限制</h3>
-    <p>无你的明确许可绝不对外泄露个人信息；仅司法机关依法调取时配合提供对应资料。</p>
-    <h3>5.用户自身权利</h3>
-    <p>你可随时停止使用本站，放弃账号所有数据；也可联系客服申请清除账号存储信息。</p>
-    <div class="modal-close">
-      <button onclick="closePrivacy()">了解并关闭</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const track = document.getElementById('mouseTrack');
-document.addEventListener('mousemove',e=>{
-  track.style.left = e.clientX + 'px';
-  track.style.top = e.clientY + 'px';
-  track.style.opacity = '1';
-})
-
-const tabLogin = document.getElementById('tabLogin');
-const tabReg = document.getElementById('tabReg');
-const loginForm = document.getElementById('loginForm');
-const regForm = document.getElementById('regForm');
-tabLogin.onclick = ()=>{
-  tabLogin.classList.add('active');
-  tabReg.classList.remove('active');
-  loginForm.style.display = 'block';
-  regForm.style.display = 'none';
-}
-tabReg.onclick = ()=>{
-  tabReg.classList.add('active');
-  tabLogin.classList.remove('active');
-  loginForm.style.display = 'none';
-  regForm.style.display = 'block';
-}
-
-const checkRemember = document.getElementById('checkRemember');
-checkRemember.onclick = ()=> checkRemember.classList.toggle('checked');
-const checkAgree = document.getElementById('checkAgree');
-checkAgree.onclick = ()=> checkAgree.classList.toggle('checked');
-
-let goodsList = [];
-const goodsBox = document.getElementById('goodsBox');
-const pointNum = document.getElementById('pointNum');
-const showName = document.getElementById('showName');
-
-// 渲染商品
-function renderGoods(){
-  goodsBox.innerHTML = '';
-  goodsList.forEach((item,index)=>{
-    const row = document.createElement('div');
-    row.className = 'goods-row';
-    row.innerHTML = `
-      <input type="text" value="${item}" placeholder="输入商品编号/名称">
-      <button class="del-btn" data-i="${index}">删除</button>
-    `;
-    goodsBox.appendChild(row);
-  })
-  document.querySelectorAll('.del-btn').forEach(btn=>{
-    btn.onclick = function(){
-      const idx = this.dataset.i;
-      goodsList.splice(idx,1);
-      renderGoods();
-    }
-  })
-}
-
-// 登录自动生成2条商品
-function enterBackend(name){
-  document.querySelector('.login-box').style.display = 'none';
-  document.getElementById('adminPanel').style.display = 'block';
-  showName.innerText = name;
-  // 固定初始化2个空白商品
-  goodsList = ['',''];
-  renderGoods();
-}
-
-// 会员登录
-document.getElementById('loginSubmit').onclick = ()=>{
-  let now = parseInt(pointNum.innerText);
-  pointNum.innerText = now + 2;
-  const acc = document.getElementById('loginUser').value || '会员用户';
-  enterBackend(acc);
-}
-
-// 修复游客按钮点击
-document.getElementById('guestBtn').onclick = ()=>{
-  enterBackend('游客临时账号');
-}
-
-// 新增商品
-document.getElementById('addGoods').onclick = function(){
-  goodsList.push('');
-  renderGoods();
-}
-
-document.getElementById('clearCart').onclick = function(){
-  goodsList = [];
-  renderGoods();
-}
-
-document.getElementById('logoutBtn').onclick = ()=>{
-  document.querySelector('.login-box').style.display = 'flex';
-  document.getElementById('adminPanel').style.display = 'none';
-  goodsList = [];
-}
-
-// 头像点击打开个人中心
-const avatarClick = document.getElementById('avatarClick');
-const userCenterModal = document.getElementById('userCenterModal');
-avatarClick.onclick = function(){
-  userCenterModal.style.display = 'block';
-}
-function closeCenter(){
-  userCenterModal.style.display = 'none';
-}
-
-function openUserAgreement(){
-  document.getElementById('modalUser').style.display = 'block';
-}
-function closeUserAgreement(){
-  document.getElementById('modalUser').style.display = 'none';
-}
-function openPrivacy(){
-  document.getElementById('modalPrivacy').style.display = 'block';
-}
-function closePrivacy(){
-  document.getElementById('modalPrivacy').style.display = 'none';
-}
-</script>
-</body>
-</html>
+  <div class
