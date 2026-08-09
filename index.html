@@ -111,8 +111,19 @@ body::after {
   color: #93c5fd;
   text-align: center;
   font-size: 13px;
-  margin-bottom: 32px;
+  margin-bottom: 12px;
   letter-spacing: 1px;
+}
+/* 登录页面系统介绍 */
+.system-desc {
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
 }
 .login-tabs {
   display: flex;
@@ -378,6 +389,7 @@ input::placeholder {
   font-weight: bold;
   transition: 0.3s;
   position: relative;
+  cursor: pointer;
 }
 .user-panel:hover .avatar {
   transform: scale(1.05);
@@ -491,7 +503,7 @@ input::placeholder {
 .count-row {background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);}
 .pay-row{background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.25);}
 
-/* 弹窗专用样式 */
+/* 弹窗 */
 .modal-box {
   display: none;
   position: fixed;
@@ -536,6 +548,24 @@ input::placeholder {
   border-radius:10px;
   cursor:pointer;
 }
+/* 个人中心弹窗 */
+.center-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index:9999;
+}
+.center-content {
+  width:90%;
+  max-width:500px;
+  margin:10vh auto;
+  padding:30px;
+  border-radius:20px;
+  background:#101528;
+  border:1px solid rgba(100,160,255,0.2);
+  color:#fff;
+}
 </style>
 </head>
 <body>
@@ -544,15 +574,19 @@ input::placeholder {
   <div class="login-box">
     <div class="login-card glass-liquid">
       <div class="login-logo">🛒</div>
-      <h1 class="title">液态玻璃购物系统</h1>
+      <h1 class="title">液态玻璃高端购物系统</h1>
       <p class="title-sub">LIQUID GLASS SHOP SYSTEM</p>
+
+      <!-- 新增系统介绍 -->
+      <div class="system-desc">
+        本系统为轻量化商品管理演示平台，支持会员登录、游客临时操作、商品录入、订单结算、积分统计功能。界面采用液态毛玻璃风格，操作简洁直观，数据本地临时存储。
+      </div>
 
       <div class="login-tabs">
         <button class="login-tab active" id="tabLogin">账号登录</button>
         <button class="login-tab" id="tabReg">注册账号</button>
       </div>
 
-      <!-- 登录表单 -->
       <div id="loginForm">
         <div class="input-item">
           <span class="input-icon">👤</span>
@@ -569,11 +603,11 @@ input::placeholder {
           </label>
           <a class="forgot-pwd">忘记密码？</a>
         </div>
-        <button class="click-btn login-btn" id="loginSubmit">立即登录</button>
-        <button class="click-btn guest-btn">游客临时访问</button>
+        <button class="click-btn login-btn" id="loginSubmit">会员登录</button>
+        <!-- 修复游客按钮点击事件 -->
+        <button class="click-btn guest-btn" id="guestBtn">游客临时访问</button>
       </div>
 
-      <!-- 注册表单 -->
       <div id="regForm" style="display:none;">
         <div class="input-item">
           <span class="input-icon">👤</span>
@@ -623,19 +657,19 @@ input::placeholder {
     </div>
   </div>
 
-  <!-- 后台管理面板（全部复原商品输入、结账、积分提示） -->
   <div class="admin-container" id="adminPanel">
-    <div class="user-panel glass-liquid">
+    <div class="user-panel glass-liquid" id="userPanelBox">
       <div class="user-head">
-        <div class="avatar">A<span class="msg-badge">3</span></div>
+        <!-- 头像绑定点击打开个人中心 -->
+        <div class="avatar" id="avatarClick">A<span class="msg-badge">3</span></div>
         <div>
-          <div class="username">欢迎你，管理员</div>
+          <div class="username">欢迎你，<span id="showName">管理员</span></div>
           <div class="integral-text">当前积分：<span id="pointNum">1280</span></div>
           <div class="coupon-text">优惠券：2张可用</div>
           <div class="point-tip">本次登录成功，自动增加2积分</div>
         </div>
       </div>
-      <div class="enter-tip">点击卡片进入个人中心</div>
+      <div class="enter-tip">点击头像进入个人中心</div>
     </div>
     <div class="func-group">
       <button class="func-btn clear-goods" id="clearCart">清空购物车</button>
@@ -644,9 +678,7 @@ input::placeholder {
     </div>
     <div class="shop-card glass-liquid">
       <h3>商品管理</h3>
-      <div id="goodsBox">
-        <!-- 商品条目容器 -->
-      </div>
+      <div id="goodsBox"></div>
       <div class="oper-row">
         <button class="add-row" id="addGoods">新增商品条目</button>
         <button class="count-row">统计库存总额</button>
@@ -656,7 +688,15 @@ input::placeholder {
   </div>
 </div>
 
-<!-- 用户协议弹窗 -->
+<!-- 个人中心弹窗 -->
+<div class="center-modal" id="userCenterModal">
+  <div class="center-content glass-liquid">
+    <h2>个人中心</h2>
+    <p style="margin:15px 0;">账号信息、积分明细、优惠券、收货地址均可在此管理</p>
+    <button onclick="closeCenter()" style="margin-top:20px;padding:8px 20px;border:none;border-radius:10px;background:#3b82f6;color:#fff;cursor:pointer;">关闭</button>
+  </div>
+</div>
+
 <div class="modal-box" id="modalUser">
   <div class="modal-inner">
     <h2>用户协议</h2>
@@ -681,7 +721,6 @@ input::placeholder {
   </div>
 </div>
 
-<!-- 隐私政策弹窗 -->
 <div class="modal-box" id="modalPrivacy">
   <div class="modal-inner">
     <h2>隐私政策</h2>
@@ -703,7 +742,6 @@ input::placeholder {
 </div>
 
 <script>
-// 鼠标跟随光效
 const track = document.getElementById('mouseTrack');
 document.addEventListener('mousemove',e=>{
   track.style.left = e.clientX + 'px';
@@ -711,7 +749,6 @@ document.addEventListener('mousemove',e=>{
   track.style.opacity = '1';
 })
 
-// 登录/注册切换
 const tabLogin = document.getElementById('tabLogin');
 const tabReg = document.getElementById('tabReg');
 const loginForm = document.getElementById('loginForm');
@@ -729,18 +766,17 @@ tabReg.onclick = ()=>{
   regForm.style.display = 'block';
 }
 
-// 记住勾选
 const checkRemember = document.getElementById('checkRemember');
 checkRemember.onclick = ()=> checkRemember.classList.toggle('checked');
 const checkAgree = document.getElementById('checkAgree');
 checkAgree.onclick = ()=> checkAgree.classList.toggle('checked');
 
-// 商品数组
 let goodsList = [];
 const goodsBox = document.getElementById('goodsBox');
 const pointNum = document.getElementById('pointNum');
+const showName = document.getElementById('showName');
 
-// 渲染商品条目
+// 渲染商品
 function renderGoods(){
   goodsBox.innerHTML = '';
   goodsList.forEach((item,index)=>{
@@ -752,7 +788,6 @@ function renderGoods(){
     `;
     goodsBox.appendChild(row);
   })
-  // 删除按钮事件
   document.querySelectorAll('.del-btn').forEach(btn=>{
     btn.onclick = function(){
       const idx = this.dataset.i;
@@ -762,35 +797,56 @@ function renderGoods(){
   })
 }
 
-// 新增商品按钮绑定（修复点击无反应）
+// 登录自动生成2条商品
+function enterBackend(name){
+  document.querySelector('.login-box').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  showName.innerText = name;
+  // 固定初始化2个空白商品
+  goodsList = ['',''];
+  renderGoods();
+}
+
+// 会员登录
+document.getElementById('loginSubmit').onclick = ()=>{
+  let now = parseInt(pointNum.innerText);
+  pointNum.innerText = now + 2;
+  const acc = document.getElementById('loginUser').value || '会员用户';
+  enterBackend(acc);
+}
+
+// 修复游客按钮点击
+document.getElementById('guestBtn').onclick = ()=>{
+  enterBackend('游客临时账号');
+}
+
+// 新增商品
 document.getElementById('addGoods').onclick = function(){
   goodsList.push('');
   renderGoods();
 }
 
-// 清空购物车
 document.getElementById('clearCart').onclick = function(){
   goodsList = [];
   renderGoods();
 }
 
-// 登录逻辑（登录+2积分复原）
-document.getElementById('loginSubmit').onclick = ()=>{
-  // 积分+2
-  let now = parseInt(pointNum.innerText);
-  pointNum.innerText = now + 2;
-  // 切换页面
-  document.querySelector('.login-box').style.display = 'none';
-  document.getElementById('adminPanel').style.display = 'block';
-  renderGoods();
-}
-// 退出登录
 document.getElementById('logoutBtn').onclick = ()=>{
   document.querySelector('.login-box').style.display = 'flex';
   document.getElementById('adminPanel').style.display = 'none';
+  goodsList = [];
 }
 
-// ==========协议弹窗函数==========
+// 头像点击打开个人中心
+const avatarClick = document.getElementById('avatarClick');
+const userCenterModal = document.getElementById('userCenterModal');
+avatarClick.onclick = function(){
+  userCenterModal.style.display = 'block';
+}
+function closeCenter(){
+  userCenterModal.style.display = 'none';
+}
+
 function openUserAgreement(){
   document.getElementById('modalUser').style.display = 'block';
 }
