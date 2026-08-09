@@ -484,270 +484,2182 @@ input::placeholder {
 }
 .add-row {background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.25);}
 .count-row {background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);}
-
-/* 弹窗专用样式 */
-.modal-box {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 9999;
+.desc-box {
+  padding:20px;
+  border-radius:12px;
+  background:rgba(250,204,21,0.08);
+  border:1px solid rgba(250,204,21,0.15);
+  margin-bottom:24px;
 }
-.modal-inner {
-  width: 92%;
-  max-width: 600px;
-  max-height: 82vh;
-  overflow-y: auto;
-  background:#141622;
-  border:1px solid rgba(100,160,255,0.18);
-  border-radius:18px;
-  padding:26px;
-  margin:40px auto;
-  color:#e8e8ee;
+.desc-box p {
+  color:#cbd5e1;
+  line-height:2;
 }
-.modal-inner h2 {
+.desc-box strong {
   color:#fff;
-  margin:0 0 14px;
 }
-.modal-inner h3 {
-  margin:16px 0 8px;
-  color:#93c5fd;
+.pay-submit {
+  width:100%;
+  height:54px;
+  border:none;
+  border-radius:16px;
+  background: linear-gradient(90deg, rgba(239,68,68,0.3), rgba(248,113,113,0.2));
+  color:#fff;
+  font-size:17px;
+  cursor:pointer;
 }
-.modal-inner p {
-  line-height:1.6;
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:999;
+  align-items:center;
+  justify-content:center;
+}
+.pop-window {
+  width:100%;
+  max-width:420px;
+  padding:40px 32px;
+  border-radius:24px;
+}
+.pop-window h4 {
+  color:#fff;
+  text-align:center;
+  font-size:21px;
+  margin-bottom:28px;
+}
+.confirm-btn {
+  width:100%;
+  height:52px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,rgba(16,185,129,0.3),rgba(52,211,153,0.25));
+  color:#fff;
+  margin-top:12px;
+  cursor:pointer;
+}
+.cancel-btn {
+  width:100%;
+  height:48px;
+  border-radius:14px;
+  border:1px solid rgba(100,160,255,0.15);
+  background:rgba(80,140,255,0.04);
+  color:#94a3b8;
+  margin-top:10px;
+  cursor:pointer;
+  font-size:15px;
+  transition:0.25s;
+}
+.cancel-btn:hover {
+  background:rgba(80,140,255,0.08);
   color:#cbd5e1;
 }
-.modal-close {
-  margin-top:24px;
-  text-align:right;
+.success-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.8);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
 }
-.modal-close button {
-  background:#3b82f6;
-  color:#fff;
-  border:none;
-  padding:9px 22px;
-  border-radius:10px;
-  cursor:pointer;
+.success-inner {
+  background:#fff;
+  width:360px;
+  border-radius:26px;
+  padding:44px 32px;
+  text-align:center;
+}
+.clickable {
+  position: relative;
+}
+
+.pay-coupon-section {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(244,114,182,0.08);
+  border: 1px solid rgba(244,114,182,0.15);
+}
+.pay-coupon-title {
+  color: #f9a8d4;
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pay-coupon-list {
+  max-height: 180px;
+  overflow-y: auto;
+}
+.pay-coupon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.pay-coupon-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+.pay-coupon-item.selected {
+  border-color: rgba(244,114,182,0.5);
+  background: rgba(244,114,182,0.1);
+}
+.pay-coupon-item.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.coupon-value {
+  color: #f472b6;
+  font-size: 20px;
+  font-weight: bold;
+}
+.coupon-value span {
+  font-size: 13px;
+  font-weight: normal;
+}
+.coupon-info {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-top: 2px;
+}
+.coupon-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: grid;
+  place-items: center;
+  transition: 0.25s;
+}
+.pay-coupon-item.selected .coupon-check {
+  border-color: #f472b6;
+  background: #f472b6;
+}
+.pay-coupon-item.selected .coupon-check::after {
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+}
+.no-coupon-tip {
+  color: #64748b;
+  font-size: 13px;
+  text-align: center;
+  padding: 16px 0;
+}
+.pay-price-detail {
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+}
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.price-line:last-child {
+  margin-bottom: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.price-line .discount {
+  color: #f472b6;
+}
+
+.user-home-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:998;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.user-home-card {
+  width:100%;
+  max-width:480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius:28px;
+  padding: 0;
+}
+.user-home-header {
+  padding: 40px 32px 30px;
+  text-align: center;
+  border-bottom: 1px solid rgba(100,160,255,0.1);
+  position: relative;
+}
+.big-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#60a5fa,#8b5cf6);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 34px;
+  font-weight: bold;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 30px rgba(139,92,246,0.3);
+  position: relative;
+}
+.home-username {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+.home-integral {
+  color: #facc15;
+  font-size: 15px;
+}
+.home-coupon {
+  color: #f472b6;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.home-level {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 14px;
+  background: rgba(250,204,21,0.15);
+  border: 1px solid rgba(250,204,21,0.25);
+  border-radius: 20px;
+  color: #fde68a;
+  font-size: 13px;
+}
+.settings-list {
+  padding: 16px 20px 24px;
+}
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  background: rgba(80,140,255,0.04);
+  border: 1px solid rgba(100,160,255,0.1);
+  cursor: pointer;
+  transition: 0.25s;
+}
+.setting-item:hover {
+  background: rgba(80,140,255,0.08);
+  transform: translateX(4px);
+}
+.setting-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.setting-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.icon-msg {background: rgba(59,130,246,0.2);color:#93c5fd;}
+.icon-send {background: rgba(16,185,129,0.2);color:#6ee7b7;}
+.icon-name {background: rgba(139,92,246,0.2);color:#c4b5fd;}
+.icon-pwd {background: rgba(249,115,22,0.2);color:#fdba74;}
+.icon-coupon {background: rgba(244,114,182,0.2);color:#f9a8d4;}
+.icon-pay {background: rgba(236,72,153,0.2);color:#f9a8d4;}
+.icon-notify {background: rgba(59,130,246,0.2);color:#93c5fd;}
+.icon-privacy {background: rgba(16,185,129,0.2);color:#6ee7b7;}
+.icon-about {background: rgba(148,163,184,0.2);color:#cbd5e1;}
+.setting-text {
+  color: #fff;
+  font-size: 15px;
+}
+.setting-desc {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-top: 3px;
+}
+.setting-arrow {
+  color: #64748b;
+  font-size: 18px;
+}
+.setting-badge {
+  background: rgba(239,68,68,0.85);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 8px;
+  min-width: 20px;
+  text-align: center;
+}
+.switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.switch.on {
+  background: rgba(34,197,94,0.4);
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px;
+  left: 3px;
+  transition: 0.3s;
+}
+.switch.on::after {
+  left: 23px;
+}
+.close-home-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(100,160,255,0.15);
+  background: rgba(80,140,255,0.04);
+  color: #cbd5e1;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.close-home-btn:hover {
+  background: rgba(80,140,255,0.08);
+}
+
+.about-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:1001;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.about-card {
+  width:100%;
+  max-width:380px;
+  border-radius:28px;
+  padding: 48px 36px;
+  text-align: center;
+}
+.about-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(96,165,250,0.3), rgba(139,92,246,0.3));
+  border: 1px solid rgba(100,160,255,0.3);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 24px;
+  font-size: 32px;
+  color: #c4b5fd;
+  box-shadow: 0 0 30px rgba(59,130,246,0.2);
+}
+.about-title {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.about-version {
+  color: #93c5fd;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.about-tag {
+  display: inline-block;
+  padding: 4px 16px;
+  background: rgba(250,204,21,0.12);
+  border: 1px solid rgba(250,204,21,0.25);
+  border-radius: 20px;
+  color: #fde68a;
+  font-size: 13px;
+  margin-bottom: 28px;
+}
+.about-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100,160,255,0.2), transparent);
+  margin-bottom: 24px;
+}
+.about-label {
+  color: #94a3b8;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.about-code {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 32px;
+}
+.about-close-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 16px;
+  border: 1px solid rgba(100,160,255,0.2);
+  background: rgba(80,140,255,0.06);
+  color: #cbd5e1;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.about-close-btn:hover {
+  background: rgba(80,140,255,0.1);
+  transform: translateY(-2px);
+}
+
+.coupon-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:1002;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.coupon-card {
+  width:100%;
+  max-width:420px;
+  max-height: 85vh;
+  border-radius:28px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.coupon-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(244,114,182,0.3), rgba(236,72,153,0.3));
+  border: 1px solid rgba(244,114,182,0.3);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  font-size: 32px;
+  color: #f9a8d4;
+  box-shadow: 0 0 30px rgba(244,114,182,0.2);
+}
+.coupon-title {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.coupon-count {
+  color: #f472b6;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 12px 0;
+}
+.coupon-count span {
+  font-size: 14px;
+  color: #94a3b8;
+  font-weight: normal;
+}
+.coupon-desc {
+  color: #94a3b8;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.coupon-next-time {
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.coupon-claim-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(90deg, rgba(244,114,182,0.3), rgba(236,72,153,0.25));
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+  border: 1px solid rgba(244,114,182,0.3);
+}
+.coupon-claim-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244,114,182,0.2);
+}
+.coupon-claim-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.coupon-list-title {
+  color: #fff;
+  font-size: 15px;
+  margin: 20px 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.coupon-list-scroll {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 100px;
+}
+.coupon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  background: rgba(244,114,182,0.08);
+  border: 1px solid rgba(244,114,182,0.15);
+  position: relative;
+  overflow: hidden;
+}
+.coupon-item.used {
+  opacity: 0.4;
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+}
+.coupon-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.coupon-item-value {
+  color: #f472b6;
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 70px;
+}
+.coupon-item-value span {
+  font-size: 13px;
+  font-weight: normal;
+}
+.coupon-item-info {
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.coupon-item-tag {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+}
+.tag-available {
+  background: rgba(16,185,129,0.2);
+  color: #6ee7b7;
+}
+.tag-used {
+  background: rgba(148,163,184,0.2);
+  color: #94a3b8;
+}
+.coupon-close-btn {
+  width: 100%;
+  height: 44px;
+  margin-top: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(100,160,255,0.15);
+  background: rgba(80,140,255,0.04);
+  color: #cbd5e1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.coupon-close-btn:hover {
+  background: rgba(80,140,255,0.08);
+}
+
+.notify-toast {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 320px;
+  border-radius: 20px;
+  padding: 20px 24px;
+  z-index: 2000;
+  transform: translateX(400px);
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+.notify-toast.show {
+  transform: translateX(0);
+}
+.notify-toast-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.notify-toast-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.notify-toast-desc {
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.msg-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:1003;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.msg-card {
+  width:100%;
+  max-width:460px;
+  max-height: 85vh;
+  border-radius:28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.msg-header {
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid rgba(100,160,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.msg-header-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.msg-header-count {
+  color: #94a3b8;
+  font-size: 13px;
+}
+.msg-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 20px;
+  min-height: 200px;
+}
+.msg-item {
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  background: rgba(80,140,255,0.04);
+  border: 1px solid rgba(100,160,255,0.1);
+  cursor: pointer;
+  transition: 0.25s;
+  position: relative;
+}
+.msg-item:hover {
+  background: rgba(80,140,255,0.08);
+  transform: translateX(4px);
+}
+.msg-item.unread {
+  border-left: 3px solid #3b82f6;
+  background: rgba(59,130,246,0.06);
+}
+.msg-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.msg-item-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+.msg-item-time {
+  color: #64748b;
+  font-size: 11px;
+}
+.msg-item-content {
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.msg-item-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  margin-right: 8px;
+}
+.tag-system {background: rgba(59,130,246,0.2);color: #93c5fd;}
+.tag-coupon {background: rgba(244,114,182,0.2);color: #f9a8d4;}
+.tag-private {background: rgba(16,185,129,0.2);color: #6ee7b7;}
+.msg-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+.msg-footer {
+  padding: 16px 20px 20px;
+  border-top: 1px solid rgba(100,160,255,0.1);
+  display: flex;
+  gap: 12px;
+}
+.msg-footer-btn {
+  flex: 1;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(100,160,255,0.15);
+  background: rgba(80,140,255,0.04);
+  color: #cbd5e1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.msg-footer-btn:hover {
+  background: rgba(80,140,255,0.08);
+}
+.msg-footer-btn.primary {
+  background: linear-gradient(90deg, rgba(16,185,129,0.3), rgba(52,211,153,0.25));
+  border: 1px solid rgba(16,185,129,0.25);
+  color: #fff;
+}
+.msg-footer-btn.primary:hover {
+  transform: translateY(-2px);
+}
+
+.send-msg-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(5,10,30,0.75);
+  backdrop-filter: blur(8px);
+  z-index:1004;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+.send-msg-card {
+  width:100%;
+  max-width:400px;
+  border-radius:28px;
+  padding: 40px 32px;
+}
+.send-msg-title {
+  color: #fff;
+  font-size: 21px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.send-msg-input {
+  margin-bottom: 20px;
+}
+.send-msg-input input,
+.send-msg-input textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(100,160,255,0.15);
+  background: rgba(80,140,255,0.04);
+  color: #fff;
+  font-size: 15px;
+  padding: 14px 18px;
+  transition: 0.3s;
+  font-family: inherit;
+}
+.send-msg-input textarea {
+  height: 100px;
+  resize: none;
+  line-height: 1.5;
+}
+.send-msg-label {
+  color: #94a3b8;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.send-msg-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(90deg, rgba(16,185,129,0.3), rgba(52,211,153,0.25));
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s;
+  border: 1px solid rgba(16,185,129,0.25);
+}
+.send-msg-btn:hover {
+  transform: translateY(-2px);
+}
+.send-msg-close {
+  width: 100%;
+  height: 46px;
+  margin-top: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(100,160,255,0.15);
+  background: rgba(80,140,255,0.04);
+  color: #cbd5e1;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.send-msg-close:hover {
+  background: rgba(80,140,255,0.08);
 }
 </style>
 </head>
 <body>
-<div class="track-glow" id="mouseTrack"></div>
+<div class="track-glow"></div>
 <div class="wrapper">
-  <div class="login-box">
+  <div class="login-box" id="loginPage">
     <div class="login-card glass-liquid">
-      <div class="login-logo">🛒</div>
-      <h1 class="title">液态玻璃购物系统</h1>
-      <p class="title-sub">LIQUID GLASS SHOP SYSTEM</p>
+      <div class="login-logo">◆</div>
+      <h2 class="title">液态玻璃高端购物系统</h2>
+      <div class="title-sub">LIQUID GLASS SHOPPING SYSTEM</div>
 
       <div class="login-tabs">
-        <button class="login-tab active" id="tabLogin">账号登录</button>
-        <button class="login-tab" id="tabReg">注册账号</button>
+        <button class="login-tab active clickable" onclick="switchLoginTab(this, 'pwd')">密码登录</button>
+        <button class="login-tab clickable" onclick="switchLoginTab(this, 'code')">验证码登录</button>
       </div>
 
-      <!-- 登录表单 -->
-      <div id="loginForm">
-        <div class="input-item">
-          <span class="input-icon">👤</span>
-          <input type="text" placeholder="请输入账号" id="loginUser">
+      <div class="input-item clickable">
+        <span class="input-icon">📱</span>
+        <input type="text" id="phoneIn" placeholder="请输入手机号">
+      </div>
+      <div class="input-item clickable" id="pwdInputWrap">
+        <span class="input-icon">🔒</span>
+        <input type="password" id="pwdIn" placeholder="登录密码">
+      </div>
+      <div class="code-row" id="codeInputWrap">
+        <div class="input-item clickable">
+          <span class="input-icon">🔑</span>
+          <input type="text" id="codeIn" placeholder="验证码">
         </div>
-        <div class="input-item">
-          <span class="input-icon">🔒</span>
-          <input type="password" placeholder="请输入密码" id="loginPwd">
-        </div>
-        <div class="login-options">
-          <label class="remember-me">
-            <div class="remember-checkbox" id="checkRemember"></div>
-            <span>记住账号</span>
-          </label>
-          <a class="forgot-pwd">忘记密码？</a>
-        </div>
-        <button class="click-btn login-btn" id="loginSubmit">立即登录</button>
-        <button class="click-btn guest-btn">游客临时访问</button>
+        <button class="code-btn clickable" id="getCodeBtn" onclick="getCode()">获取验证码</button>
       </div>
 
-      <!-- 注册表单 -->
-      <div id="regForm" style="display:none;">
-        <div class="input-item">
-          <span class="input-icon">👤</span>
-          <input type="text" placeholder="设置账号" id="regUser">
+      <div class="login-options">
+        <div class="remember-me clickable" onclick="toggleRemember(this)">
+          <div class="remember-checkbox checked"></div>
+          <span>记住手机号</span>
         </div>
-        <div class="input-item">
-          <span class="input-icon">🔒</span>
-          <input type="password" placeholder="设置密码" id="regPwd">
-        </div>
-        <div class="input-item">
-          <span class="input-icon">🔐</span>
-          <input type="password" placeholder="确认密码" id="regPwd2">
-        </div>
-        <div class="code-row">
-          <div class="input-item">
-            <span class="input-icon">📩</span>
-            <input type="text" placeholder="验证码">
-          </div>
-          <button class="code-btn">获取验证码</button>
-        </div>
-        <div class="login-options">
-          <label class="remember-me">
-            <div class="remember-checkbox" id="checkAgree"></div>
-            <span>我已阅读并同意</span>
-            <!-- 这里已经替换成弹窗点击 -->
-            <a onclick="openUserAgreement()">用户协议</a>
-            <span>/</span>
-            <a onclick="openPrivacy()">隐私政策</a>
-          </label>
-        </div>
-        <button class="click-btn login-btn" id="regSubmit">完成注册</button>
+        <a class="forgot-pwd clickable" onclick="alert('请联系管理员重置密码')">忘记密码？</a>
       </div>
+
+      <button class="click-btn login-btn clickable" onclick="loginAction()">立即登录</button>
+      <button class="click-btn guest-btn clickable" onclick="guestEnter()">没有会员，游客进入</button>
 
       <div class="divider-line">
         <span class="divider-text">其他登录方式</span>
       </div>
+
       <div class="social-login">
-        <div class="social-icon">Q</div>
-        <div class="social-icon">W</div>
-        <div class="social-icon">G</div>
+        <div class="social-icon clickable" onclick="alert('微信登录功能开发中')" title="微信登录">💬</div>
+        <div class="social-icon clickable" onclick="alert('QQ登录功能开发中')" title="QQ登录">🐧</div>
+        <div class="social-icon clickable" onclick="alert('支付宝登录功能开发中')" title="支付宝登录">💰</div>
+        <div class="social-icon clickable" onclick="alert('邮箱登录功能开发中')" title="邮箱登录">📧</div>
       </div>
 
       <div class="login-footer">
-        <a onclick="openUserAgreement()">用户协议</a>
-        <a onclick="openPrivacy()">隐私政策</a>
+        <a class="clickable" onclick="openAboutFromLogin()">关于系统</a>
+        <a class="clickable" onclick="alert('用户协议功能开发中')">用户协议</a>
+        <a class="clickable" onclick="alert('隐私政策功能开发中')">隐私政策</a>
       </div>
-      <div class="copyright">©2026 液态玻璃高端购物系统 版权所有</div>
+      <div class="copyright">© 2026 液态玻璃购物系统 · 专属定制版</div>
     </div>
   </div>
 
-  <!-- 后台管理面板 -->
-  <div class="admin-container" id="adminPanel">
-    <div class="user-panel glass-liquid">
+  <div class="admin-container" id="adminPage">
+    <div class="user-panel glass-liquid clickable" onclick="openUserHome()">
       <div class="user-head">
-        <div class="avatar">A<span class="msg-badge">3</span></div>
+        <div class="avatar" id="avatarText">
+          会
+          <span class="msg-badge" id="msgBadge" style="display:none;">0</span>
+        </div>
         <div>
-          <div class="username">欢迎你，管理员</div>
-          <div class="integral-text">当前积分：1280</div>
-          <div class="coupon-text">优惠券：2张可用</div>
+          <div class="username" id="userName">会员用户</div>
+          <div class="enter-tip">点击进入个人主页 →</div>
         </div>
       </div>
-      <div class="enter-tip">点击卡片进入个人中心</div>
+      <div class="integral-text">当前积分：<span id="integralNum">0</span></div>
+      <div class="coupon-text">🎟 优惠券：<span id="couponNum">0</span>张可用</div>
     </div>
+
     <div class="func-group">
-      <button class="func-btn clear-goods">清空购物车</button>
-      <button class="func-btn log-btn">操作日志</button>
-      <button class="func-btn logout" id="logoutBtn">退出登录</button>
+      <button class="func-btn clear-goods clickable" onclick="clearAllInput()">清空商品</button>
+      <button class="func-btn log-btn clickable" onclick="openLog()">积分明细</button>
+      <button class="func-btn logout clickable" onclick="backLogin()">退出登录</button>
     </div>
+
     <div class="shop-card glass-liquid">
-      <h3>商品管理</h3>
-      <div id="goodsBox"></div>
+      <h3>批量下单中心</h3>
+      <div id="goodsBox">
+        <div class="goods-row">
+          <input class="clickable" placeholder="商品1">
+          <button class="del-btn clickable" onclick="delRow(this)">删除</button>
+        </div>
+        <div class="goods-row">
+          <input class="clickable" placeholder="商品2">
+          <button class="del-btn clickable" onclick="delRow(this)">删除</button>
+        </div>
+      </div>
       <div class="oper-row">
-        <button class="add-row" id="addGoods">新增商品</button>
-        <button class="count-row">统计库存</button>
+        <button class="add-row clickable" onclick="addRow()">新增商品栏</button>
+        <button class="count-row clickable" onclick="calcPrice()">计算总价</button>
+      </div>
+      <div class="desc-box">
+        <p><strong>单价：</strong>14.5元/件</p>
+        <p id="totalShow"><strong>总价：</strong>0.00元</p>
+        <p>会员登录+2积分，每结算一次+5积分；游客无积分</p>
+      </div>
+      <button class="pay-submit clickable" onclick="openPayModal()">批量结算支付</button>
+    </div>
+  </div>
+
+  <div class="modal" id="nameModal">
+    <div class="pop-window glass-liquid">
+      <h4>修改昵称</h4>
+      <div class="input-item clickable">
+        <input type="text" id="newName" placeholder="输入新昵称">
+      </div>
+      <button class="confirm-btn clickable" onclick="saveName()">确认修改</button>
+      <button class="cancel-btn clickable" onclick="closeNameModal()">取消</button>
+    </div>
+  </div>
+  <div class="modal" id="pwdModal">
+    <div class="pop-window glass-liquid">
+      <h4>修改登录密码</h4>
+      <div class="input-item clickable"><input id="oldPwd" placeholder="原密码"></div>
+      <div class="input-item clickable"><input id="newPwd" placeholder="新密码"></div>
+      <button class="confirm-btn clickable" onclick="savePwd()">确认</button>
+      <button class="cancel-btn clickable" onclick="closePwdModal()">取消</button>
+    </div>
+  </div>
+  <div class="modal" id="payModal">
+    <div class="pop-window glass-liquid">
+      <h4>确认支付</h4>
+      
+      <div class="pay-price-detail" id="payPriceDetail">
+        <div class="price-line">
+          <span>商品总价</span>
+          <span id="payOriginPrice">¥0.00</span>
+        </div>
+        <div class="price-line" id="payDiscountLine" style="display:none;">
+          <span>优惠券抵扣</span>
+          <span class="discount" id="payDiscount">-¥0.00</span>
+        </div>
+        <div class="price-line">
+          <span>实付金额</span>
+          <span id="payFinalPrice">¥0.00</span>
+        </div>
+      </div>
+
+      <div class="pay-coupon-section" id="payCouponSection" style="display:none;">
+        <div class="pay-coupon-title">
+          <span>🎟 选择优惠券</span>
+          <span id="payCouponCount">0张可用</span>
+        </div>
+        <div class="pay-coupon-list" id="payCouponList">
+        </div>
+      </div>
+
+      <div class="input-item clickable" style="margin-top:20px;">
+        <input type="password" id="payPwd" placeholder="输入支付密码">
+      </div>
+      <button class="confirm-btn clickable" onclick="payOk()">提交订单</button>
+      <button class="cancel-btn clickable" onclick="closePayModal()">取消支付</button>
+    </div>
+  </div>
+  <div class="modal" id="logModal">
+    <div class="pop-window glass-liquid">
+      <h4>积分记录</h4>
+      <div id="logContent" style="max-height:220px;overflow-y:auto;color:#cbd5e1;"></div>
+      <button class="confirm-btn clickable" onclick="closeLog()">关闭</button>
+    </div>
+  </div>
+  <div class="success-modal" id="successModal">
+    <div class="success-inner">
+      <div style="width:84px;height:84px;border-radius:50%;background:#22c55e;margin:0 auto 20px;display:grid;place-items:center;color:#fff;font-size:40px;">✓</div>
+      <p style="font-size:21px;color:#222;margin-bottom:10px;">下单成功</p>
+      <p id="successDetail" style="font-size:14px;color:#666;margin-bottom:30px;">实付金额：¥0.00</p>
+      <button style="width:100%;height:50px;background:#3b82f6;color:#fff;border:none;border-radius:14px;" onclick="closeSuccess()">返回登录</button>
+    </div>
+  </div>
+
+  <div class="user-home-modal" id="userHomeModal">
+    <div class="user-home-card glass-liquid">
+      <div class="user-home-header">
+        <div class="big-avatar" id="bigAvatarText">
+          会
+          <span class="msg-badge" id="homeMsgBadge" style="display:none;top:0;right:calc(50% - 60px);">0</span>
+        </div>
+        <div class="home-username" id="homeUserName">会员用户</div>
+        <div class="home-integral">积分：<span id="homeIntegralNum">0</span></div>
+        <div class="home-coupon">🎟 优惠券：<span id="homeCouponNum">0</span>张可用</div>
+        <div class="home-level">黄金会员</div>
+      </div>
+      <div class="settings-list">
+        <div class="setting-item clickable" onclick="openMsgCenter()">
+          <div class="setting-left">
+            <div class="setting-icon icon-msg">💬</div>
+            <div>
+              <div class="setting-text">消息中心</div>
+              <div class="setting-desc">查看所有通知与私信</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="setting-badge" id="msgCenterBadge" style="display:none;">0</span>
+            <div class="setting-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="setting-item clickable" onclick="openSendMsg()">
+          <div class="setting-left">
+            <div class="setting-icon icon-send">✉</div>
+            <div>
+              <div class="setting-text">发送私信</div>
+              <div class="setting-desc">通过手机号给别人发消息</div>
+            </div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+
+        <div class="setting-item clickable" onclick="openCoupon()">
+          <div class="setting-left">
+            <div class="setting-icon icon-coupon">🎟</div>
+            <div>
+              <div class="setting-text">我的优惠券</div>
+              <div class="setting-desc">每小时可领取一张</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;">
+            <span class="setting-badge" id="couponBadge" style="display:none;">可领取</span>
+            <div class="setting-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="setting-item clickable" onclick="openEditName()">
+          <div class="setting-left">
+            <div class="setting-icon icon-name">✎</div>
+            <div>
+              <div class="setting-text">修改昵称</div>
+              <div class="setting-desc">更改你的显示名称</div>
+            </div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+
+        <div class="setting-item clickable" onclick="openEditPwd()">
+          <div class="setting-left">
+            <div class="setting-icon icon-pwd">🔒</div>
+            <div>
+              <div class="setting-text">修改登录密码</div>
+              <div class="setting-desc">定期更换更安全</div>
+            </div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+
+        <div class="setting-item clickable" onclick="alert('支付密码设置功能开发中')">
+          <div class="setting-left">
+            <div class="setting-icon icon-pay">💳</div>
+            <div>
+              <div class="setting-text">支付密码设置</div>
+              <div class="setting-desc">管理支付安全</div>
+            </div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+
+        <div class="setting-item" onclick="toggleSwitch(this)">
+          <div class="setting-left">
+            <div class="setting-icon icon-notify">🔔</div>
+            <div>
+              <div class="setting-text">消息通知</div>
+              <div class="setting-desc">新券与私信提醒</div>
+            </div>
+          </div>
+          <div class="switch on" id="notifySwitch" onclick="event.stopPropagation()"></div>
+        </div>
+
+        <div class="setting-item" onclick="toggleSwitch(this)">
+          <div class="setting-left">
+            <div class="setting-icon icon-privacy">🛡</div>
+            <div>
+              <div class="setting-text">隐私保护</div>
+              <div class="setting-desc">隐藏个人信息</div>
+            </div>
+          </div>
+          <div class="switch" onclick="event.stopPropagation()"></div>
+        </div>
+
+        <div class="setting-item clickable" onclick="openAbout()">
+          <div class="setting-left">
+            <div class="setting-icon icon-about">ⓘ</div>
+            <div>
+              <div class="setting-text">关于系统</div>
+              <div class="setting-desc">版本信息</div>
+            </div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+
+        <button class="close-home-btn clickable" onclick="closeUserHome()">关闭个人主页</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- 用户协议弹窗 -->
-<div class="modal-box" id="modalUser">
-  <div class="modal-inner">
-    <h2>用户协议</h2>
-    <p>欢迎访问本液态玻璃高端购物系统，在使用本站全部服务前，请仔细阅读本协议全部条款，使用即代表同意约束。</p>
-    <h3>一、服务说明</h3>
-    <p>本网站为线上购物演示系统，提供商品浏览、下单、积分、优惠券等基础功能，仅供正常合规使用，禁止商用违规操作。</p>
-    <h3>二、账号注册与保管</h3>
-    <p>1.注册账号请填写真实合规信息，禁止冒用他人身份；
-    <br>2.账号密码由使用者自行保管，账号下所有操作责任由账号持有人承担；
-    <br>3.禁止转借、出售、共享账号，违规平台可限制账号权限。</p>
-    <h3>三、用户行为规范</h3>
-    <p>禁止发布辱骂、色情、造谣、违法内容；禁止爬虫批量刷取、恶意攻击网站；一旦违规，平台有权封禁账号并保留追责权利。</p>
-    <h3>四、交易与积分规则</h3>
-    <p>积分、优惠券仅限平台内抵扣使用，不可兑换现金；活动规则平台可合理调整，调整后页面公示生效。</p>
-    <h3>五、免责声明</h3>
-    <p>本站为演示项目，不承诺服务永久不间断；因用户自身操作失误、网络环境问题造成损失，由用户自行承担。</p>
-    <h3>六、协议更新</h3>
-    <p>平台可随时修订协议内容，页面更新展示后立即生效，持续使用代表接受新版协议。</p>
-    <div class="modal-close">
-      <button onclick="closeUserAgreement()">我已阅读，关闭</button>
+  <div class="about-modal" id="aboutModal">
+    <div class="about-card glass-liquid">
+      <div class="about-logo">◆</div>
+      <div class="about-title">液态玻璃高端购物系统</div>
+      <div class="about-version">V2.0</div>
+      <div class="about-tag">专属定制版本</div>
+      <div class="about-divider"></div>
+      <div class="about-label">专属编号</div>
+      <div class="about-code">#09879912</div>
+      <button class="about-close-btn clickable" onclick="closeAbout()">关闭</button>
     </div>
   </div>
-</div>
 
-<!-- 隐私政策弹窗 -->
-<div class="modal-box" id="modalPrivacy">
-  <div class="modal-inner">
-    <h2>隐私政策</h2>
-    <p>我们高度重视你的个人信息隐私安全，本政策说明信息收集、使用、保护全部规则。</p>
-    <h3>1.信息收集范围</h3>
-    <p>仅收集你主动填写的账号、密码、收货信息；不会私自获取相册、通讯录、定位等设备隐私权限。</p>
-    <h3>2.信息使用用途</h3>
-    <p>收集数据仅用于登录验证、订单处理、积分发放，不会倒卖、共享给第三方推广机构。</p>
-    <h3>3.数据安全防护</h3>
-    <p>平台采用基础加密防护存储信息，但互联网无法做到绝对安全，请勿填写高度敏感私密信息。</p>
-    <h3>4.信息披露限制</h3>
-    <p>无你的明确许可绝不对外泄露个人信息；仅司法机关依法调取时配合提供对应资料。</p>
-    <h3>5.用户自身权利</h3>
-    <p>你可随时停止使用本站，放弃账号所有数据；也可联系客服申请清除账号存储信息。</p>
-    <div class="modal-close">
-      <button onclick="closePrivacy()">了解并关闭</button>
+  <div class="coupon-modal" id="couponModal">
+    <div class="coupon-card glass-liquid">
+      <div class="coupon-icon">🎟</div>
+      <div class="coupon-title">我的优惠券</div>
+      <div class="coupon-count"><span id="couponCountNum">0</span> <span>张可用</span></div>
+      <div class="coupon-desc">系统每小时发放一张优惠券<br>每张券面值随机，结算时可抵扣</div>
+      <div class="coupon-next-time" id="couponNextTime">距离下一张还有：--:--:--</div>
+      <button class="coupon-claim-btn clickable" id="claimBtn" onclick="claimCoupon()">立即领取</button>
+      
+      <div class="coupon-list-title">
+        <span>券包明细</span>
+        <span style="color:#94a3b8;font-size:12px;" id="couponTotalCount">共0张</span>
+      </div>
+      <div class="coupon-list-scroll" id="couponListScroll">
+        <div class="msg-empty">暂无优惠券</div>
+      </div>
+
+      <button class="coupon-close-btn clickable" onclick="closeCoupon()">关闭</button>
     </div>
   </div>
+
+  <div class="msg-modal" id="msgModal">
+    <div class="msg-card glass-liquid">
+      <div class="msg-header">
+        <div class="msg-header-title">消息中心</div>
+        <div class="msg-header-count"><span id="unreadCount">0</span> 条未读</div>
+      </div>
+      <div class="msg-list" id="msgList">
+        <div class="msg-empty">暂无消息</div>
+      </div>
+      <div class="msg-footer">
+        <button class="msg-footer-btn clickable" onclick="markAllRead()">全部已读</button>
+        <button class="msg-footer-btn primary clickable" onclick="openSendMsgFromMsg()">发消息</button>
+        <button class="msg-footer-btn clickable" onclick="closeMsgCenter()">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="send-msg-modal" id="sendMsgModal">
+    <div class="send-msg-card glass-liquid">
+      <div class="send-msg-title">发送私信</div>
+      <div class="send-msg-input">
+        <div class="send-msg-label">对方手机号</div>
+        <input type="text" id="targetPhone" placeholder="请输入对方手机号" class="clickable">
+      </div>
+      <div class="send-msg-input">
+        <div class="send-msg-label">消息内容</div>
+        <textarea id="msgContent" placeholder="输入要发送的内容..." class="clickable"></textarea>
+      </div>
+      <button class="send-msg-btn clickable" onclick="sendMessage()">发送消息</button>
+      <button class="send-msg-close clickable" onclick="closeSendMsg()">取消</button>
+    </div>
+  </div>
+
+  <div class="notify-toast glass-liquid" id="notifyToast" onclick="handleToastClick()">
+    <div class="notify-toast-icon" id="toastIcon" style="background: linear-gradient(135deg, rgba(244,114,182,0.3), rgba(236,72,153,0.3));color:#f9a8d4;">🎟</div>
+    <div class="notify-toast-title" id="toastTitle">新优惠券到账！</div>
+    <div class="notify-toast-desc" id="toastDesc">系统已发放新的优惠券，点击前往领取</div>
+  </div>
+
 </div>
 
 <script>
-// 鼠标跟随光效
-const track = document.getElementById('mouseTrack');
-document.addEventListener('mousemove',e=>{
-  track.style.left = e.clientX + 'px';
-  track.style.top = e.clientY + 'px';
-  track.style.opacity = '1';
+// 鼠标追踪光效
+const glow = document.querySelector('.track-glow');
+let hoverActive = false;
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+  glow.style.opacity = hoverActive ? 1 : 0;
+})
+document.addEventListener('mouseover', e => {
+  if(e.target.closest('.clickable')) hoverActive = true;
+})
+document.addEventListener('mouseout', e => {
+  if(e.target.closest('.clickable')) hoverActive = false;
 })
 
-// 登录/注册切换
-const tabLogin = document.getElementById('tabLogin');
-const tabReg = document.getElementById('tabReg');
-const loginForm = document.getElementById('loginForm');
-const regForm = document.getElementById('regForm');
-tabLogin.onclick = ()=>{
-  tabLogin.classList.add('active');
-  tabReg.classList.remove('active');
-  loginForm.style.display = 'block';
-  regForm.style.display = 'none';
-}
-tabReg.onclick = ()=>{
-  tabReg.classList.add('active');
-  tabLogin.classList.remove('active');
-  loginForm.style.display = 'none';
-  regForm.style.display = 'block';
-}
-
-// 记住勾选
-const checkRemember = document.getElementById('checkRemember');
-checkRemember.onclick = ()=> checkRemember.classList.toggle('checked');
-const checkAgree = document.getElementById('checkAgree');
-checkAgree.onclick = ()=> checkAgree.classList.toggle('checked');
-
-// 登录跳转后台
-document.getElementById('loginSubmit').onclick = ()=>{
-  document.querySelector('.login-box').style.display = 'none';
-  document.getElementById('adminPanel').style.display = 'block';
-}
-document.getElementById('logoutBtn').onclick = ()=>{
-  document.querySelector('.login-box').style.display = 'flex';
-  document.getElementById('adminPanel').style.display = 'none';
+// ===== 登录Tab切换 =====
+let currentLoginMode = 'pwd';
+function switchLoginTab(btn, mode){
+  document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentLoginMode = mode;
+  const pwdWrap = document.getElementById('pwdInputWrap');
+  const codeWrap = document.getElementById('codeInputWrap');
+  if(mode === 'pwd'){
+    pwdWrap.style.display = 'block';
+    codeWrap.style.display = 'none';
+  } else {
+    pwdWrap.style.display = 'none';
+    codeWrap.style.display = 'flex';
+  }
 }
 
-// ==========协议弹窗函数==========
-function openUserAgreement(){
-  document.getElementById('modalUser').style.display = 'block';
+// ===== 获取验证码倒计时 =====
+let codeCountdown = 0;
+function getCode(){
+  if(codeCountdown > 0) return;
+  const phone = document.getElementById('phoneIn').value.trim();
+  if(!phone){
+    alert("请先输入手机号");
+    return;
+  }
+  codeCountdown = 60;
+  const btn = document.getElementById('getCodeBtn');
+  btn.disabled = true;
+  btn.innerText = codeCountdown + 's后重发';
+  const timer = setInterval(() => {
+    codeCountdown--;
+    if(codeCountdown <= 0){
+      clearInterval(timer);
+      btn.disabled = false;
+      btn.innerText = '获取验证码';
+    } else {
+      btn.innerText = codeCountdown + 's后重发';
+    }
+  }, 1000);
 }
-function closeUserAgreement(){
-  document.getElementById('modalUser').style.display = 'none';
+
+// ===== 记住手机号 =====
+function toggleRemember(item){
+  const cb = item.querySelector('.remember-checkbox');
+  cb.classList.toggle('checked');
 }
-function openPrivacy(){
-  document.getElementById('modalPrivacy').style.display = 'block';
+
+// ===== 全局变量 =====
+let integral = 0;
+let userName = "";
+let originPwd = "";
+let logList = [];
+let isGuest = false;
+let currentPhone = "";
+let coupons = [];
+let lastCouponTime = 0;
+let notifyEnabled = true;
+let couponTimer = null;
+let messages = [];
+let toastType = 'coupon';
+let selectedCouponId = null;
+let currentOrderTotal = 0;
+
+// ===== 账号存储 =====
+function getAccounts(){
+  try {
+    return JSON.parse(localStorage.getItem('liquidShopAccounts') || '{}');
+  } catch(e) {
+    return {};
+  }
 }
-function closePrivacy(){
-  document.getElementById('modalPrivacy').style.display = 'none';
+function saveAccount(){
+  if(isGuest || !currentPhone) return;
+  let accounts = getAccounts();
+  accounts[currentPhone] = {
+    password: originPwd,
+    name: userName,
+    integral: integral,
+    logs: logList,
+    coupons: coupons,
+    lastCouponTime: lastCouponTime,
+    notifyEnabled: notifyEnabled,
+    messages: messages
+  };
+  localStorage.setItem('liquidShopAccounts', JSON.stringify(accounts));
+}
+
+// ===== 随机昵称 =====
+function randomName(){
+  const arr = ["尊享买家","黄金会员","优选达人","高级客户"];
+  return arr[Math.floor(Math.random()*arr.length)] + Math.floor(1000+Math.random()*9000);
+}
+
+// ===== 随机优惠券面值（5-30元） =====
+function randomCouponValue(){
+  return Math.floor((5 + Math.random() * 25) * 10) / 10;
+}
+
+// ===== 旧数据兼容 =====
+function migrateCoupons(oldCoupons){
+  if(Array.isArray(oldCoupons)) return oldCoupons;
+  if(typeof oldCoupons === 'number' && oldCoupons > 0){
+    const arr = [];
+    for(let i = 0; i < oldCoupons; i++){
+      arr.push({
+        id: Date.now() + i,
+        value: randomCouponValue(),
+        time: Date.now() - i * 60000,
+        used: false
+      });
+    }
+    return arr;
+  }
+  return [];
+}
+
+// ===== 获取可用优惠券 =====
+function getAvailableCoupons(){
+  if(!Array.isArray(coupons)) return [];
+  return coupons.filter(c => !c.used);
+}
+
+// ===== 格式化时间 =====
+function formatTime(ts){
+  const d = new Date(ts);
+  const now = new Date();
+  const diff = now - d;
+  if(diff < 60000) return '刚刚';
+  if(diff < 3600000) return Math.floor(diff/60000) + '分钟前';
+  if(diff < 86400000) return Math.floor(diff/3600000) + '小时前';
+  return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function formatDate(ts){
+  const d = new Date(ts);
+  return `${d.getMonth()+1}月${d.getDate()}日 ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+// ===== 获取未读消息数 =====
+function getUnreadCount(){
+  if(!Array.isArray(messages)) return 0;
+  return messages.filter(m => !m.read).length;
+}
+
+// ===== 更新未读消息角标 =====
+function updateMsgBadge(){
+  const count = getUnreadCount();
+  const badge1 = document.getElementById('msgBadge');
+  const badge2 = document.getElementById('homeMsgBadge');
+  const badge3 = document.getElementById('msgCenterBadge');
+  if(count > 0 && !isGuest){
+    badge1.style.display = 'grid';
+    badge1.innerText = count > 99 ? '99+' : count;
+    badge2.style.display = 'grid';
+    badge2.innerText = count > 99 ? '99+' : count;
+    badge3.style.display = 'inline-block';
+    badge3.innerText = count > 99 ? '99+' : count;
+  } else {
+    badge1.style.display = 'none';
+    badge2.style.display = 'none';
+    badge3.style.display = 'none';
+  }
+  const uc = document.getElementById('unreadCount');
+  if(uc) uc.innerText = count;
+}
+
+// ===== 更新用户UI =====
+function updateUserUI(){
+  document.getElementById('userName').innerText = userName;
+  document.getElementById('homeUserName').innerText = userName;
+  document.getElementById('integralNum').innerText = integral;
+  document.getElementById('homeIntegralNum').innerText = integral;
+  document.getElementById('avatarText').firstChild.textContent = userName[0];
+  document.getElementById('bigAvatarText').firstChild.textContent = userName[0];
+  const availCount = getAvailableCoupons().length;
+  document.getElementById('couponNum').innerText = availCount;
+  document.getElementById('homeCouponNum').innerText = availCount;
+  const sw = document.getElementById('notifySwitch');
+  if(notifyEnabled) sw.classList.add('on');
+  else sw.classList.remove('on');
+  updateMsgBadge();
+}
+
+// ===== 添加消息 =====
+function addMessage(type, title, content, fromPhone){
+  const msg = {
+    id: Date.now() + Math.random(),
+    type: type,
+    title: title,
+    content: content,
+    from: fromPhone || '系统',
+    time: Date.now(),
+    read: false
+  };
+  messages.unshift(msg);
+  saveAccount();
+  updateMsgBadge();
+  if(notifyEnabled && !isGuest){
+    showNotifyToast(type, title, content);
+  }
+}
+
+// ===== 登录 =====
+function loginAction(){
+  let phoneVal = document.getElementById('phoneIn').value.trim();
+  let pwdVal = document.getElementById('pwdIn').value.trim();
+  let codeVal = document.getElementById('codeIn').value.trim();
+
+  if(phoneVal === ""){ alert("手机号不能为空！"); return false; }
+  
+  if(currentLoginMode === 'pwd'){
+    if(pwdVal === ""){ alert("登录密码不能为空！"); return false; }
+  } else {
+    if(codeVal === ""){ alert("验证码不能为空！"); return false; }
+  }
+
+  isGuest = false;
+  currentPhone = phoneVal;
+  let accounts = getAccounts();
+
+  if(accounts[phoneVal]){
+    if(currentLoginMode === 'pwd'){
+      if(accounts[phoneVal].password !== pwdVal){
+        alert("密码错误，请重新输入！");
+        return false;
+      }
+    }
+    originPwd = accounts[phoneVal].password;
+    userName = accounts[phoneVal].name;
+    integral = accounts[phoneVal].integral || 0;
+    logList = accounts[phoneVal].logs || [];
+    coupons = migrateCoupons(accounts[phoneVal].coupons);
+    lastCouponTime = accounts[phoneVal].lastCouponTime || 0;
+    notifyEnabled = accounts[phoneVal].notifyEnabled !== false;
+    messages = Array.isArray(accounts[phoneVal].messages) ? accounts[phoneVal].messages : [];
+  } else {
+    originPwd = pwdVal || '123456';
+    userName = randomName();
+    integral = 2;
+    logList = ["注册奖励 +2积分"];
+    coupons = [{
+      id: Date.now(),
+      value: randomCouponValue(),
+      time: Date.now(),
+      used: false
+    }];
+    lastCouponTime = Date.now();
+    notifyEnabled = true;
+    messages = [];
+    addMessage('system', '欢迎加入液态玻璃购物系统', '尊敬的会员，感谢您的注册！送您1张新人优惠券，面值随机，祝您购物愉快~');
+    saveAccount();
+  }
+
+  updateUserUI();
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'block';
+
+  startCouponTimer();
+  checkCouponAvailable();
+}
+
+function guestEnter(){
+  isGuest = true;
+  currentPhone = "";
+  userName = "游客用户";
+  integral = 0;
+  logList = [];
+  coupons = [];
+  messages = [];
+  document.getElementById('avatarText').firstChild.textContent = "游";
+  document.getElementById('bigAvatarText').firstChild.textContent = "游";
+  document.getElementById('userName').innerText = userName;
+  document.getElementById('homeUserName').innerText = userName;
+  document.getElementById('integralNum').innerText = integral;
+  document.getElementById('homeIntegralNum').innerText = integral;
+  document.getElementById('couponNum').innerText = 0;
+  document.getElementById('homeCouponNum').innerText = 0;
+  updateMsgBadge();
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'block';
+}
+
+// ===== 用户主页 =====
+function openUserHome(){
+  if(isGuest){
+    alert("游客模式无法进入个人主页，请登录会员账号");
+    return;
+  }
+  updateCouponBadge();
+  updateMsgBadge();
+  document.getElementById('userHomeModal').style.display = 'flex';
+}
+function closeUserHome(){
+  document.getElementById('userHomeModal').style.display = 'none';
+}
+
+// ===== 关于系统 =====
+function openAbout(){
+  document.getElementById('userHomeModal').style.display = 'none';
+  document.getElementById('aboutModal').dataset.fromHome = 'true';
+  document.getElementById('aboutModal').style.display = 'flex';
+}
+function openAboutFromLogin(){
+  document.getElementById('aboutModal').dataset.fromHome = 'false';
+  document.getElementById('aboutModal').style.display = 'flex';
+}
+function closeAbout(){
+  let fromHome = document.getElementById('aboutModal').dataset.fromHome === 'true';
+  document.getElementById('aboutModal').style.display = 'none';
+  if(fromHome){
+    document.getElementById('userHomeModal').style.display = 'flex';
+  }
+}
+
+// ===== 优惠券系统 =====
+const COUPON_INTERVAL = 60 * 60 * 1000;
+
+function canClaimCoupon(){
+  if(isGuest) return false;
+  return Date.now() - lastCouponTime >= COUPON_INTERVAL;
+}
+
+function updateCouponBadge(){
+  const badge = document.getElementById('couponBadge');
+  if(canClaimCoupon()){
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function checkCouponAvailable(){
+  if(isGuest) return;
+  if(canClaimCoupon() && notifyEnabled){
+    const lastCouponMsg = messages.find(m => m.type === 'coupon');
+    const shouldNotify = !lastCouponMsg || (Date.now() - lastCouponMsg.time >= COUPON_INTERVAL);
+    if(shouldNotify){
+      addMessage('coupon', '新优惠券到账', '系统已发放新的优惠券，面值随机，快去领取吧~');
+    }
+  }
+  updateCouponBadge();
+}
+
+// ===== 通知Toast =====
+function showNotifyToast(type, title, desc){
+  const toast = document.getElementById('notifyToast');
+  const icon = document.getElementById('toastIcon');
+  const t = document.getElementById('toastTitle');
+  const d = document.getElementById('toastDesc');
+  
+  toastType = type;
+  t.innerText = title;
+  d.innerText = desc;
+  
+  if(type === 'coupon'){
+    icon.style.background = 'linear-gradient(135deg, rgba(244,114,182,0.3), rgba(236,72,153,0.3))';
+    icon.style.color = '#f9a8d4';
+    icon.innerText = '🎟';
+  } else if(type === 'private'){
+    icon.style.background = 'linear-gradient(135deg, rgba(16,185,129,0.3), rgba(52,211,153,0.3))';
+    icon.style.color = '#6ee7b7';
+    icon.innerText = '✉';
+  } else {
+    icon.style.background = 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(37,99,235,0.3))';
+    icon.style.color = '#93c5fd';
+    icon.innerText = '🔔';
+  }
+  
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 5000);
+}
+
+function handleToastClick(){
+  const toast = document.getElementById('notifyToast');
+  toast.classList.remove('show');
+  if(toastType === 'coupon'){
+    openCoupon();
+  } else {
+    openMsgCenter();
+  }
+}
+
+// ===== 优惠券弹窗 =====
+function openCoupon(){
+  if(isGuest){
+    alert("游客无法领取优惠券");
+    return;
+  }
+  if(document.getElementById('userHomeModal').style.display === 'flex'){
+    document.getElementById('userHomeModal').style.display = 'none';
+    document.getElementById('couponModal').dataset.fromHome = 'true';
+  } else {
+    document.getElementById('couponModal').dataset.fromHome = 'false';
+  }
+  updateCouponUI();
+  renderCouponList();
+  document.getElementById('couponModal').style.display = 'flex';
+}
+
+function closeCoupon(){
+  document.getElementById('couponModal').style.display = 'none';
+  let fromHome = document.getElementById('couponModal').dataset.fromHome === 'true';
+  if(fromHome){
+    document.getElementById('userHomeModal').style.display = 'flex';
+  }
+}
+
+function updateCouponUI(){
+  const availCount = getAvailableCoupons().length;
+  document.getElementById('couponCountNum').innerText = availCount;
+  const btn = document.getElementById('claimBtn');
+  if(canClaimCoupon()){
+    btn.disabled = false;
+    btn.innerText = "立即领取";
+  } else {
+    btn.disabled = true;
+    btn.innerText = "已领取，等待下一张";
+  }
+  updateCountdown();
+}
+
+function renderCouponList(){
+  const list = document.getElementById('couponListScroll');
+  document.getElementById('couponTotalCount').innerText = `共${coupons.length}张`;
+  if(coupons.length === 0){
+    list.innerHTML = '<div class="msg-empty">暂无优惠券</div>';
+    return;
+  }
+  let html = '';
+  const sorted = [...coupons].sort((a,b) => b.time - a.time);
+  sorted.forEach(c => {
+    const usedClass = c.used ? 'used' : '';
+    const tagClass = c.used ? 'tag-used' : 'tag-available';
+    const tagText = c.used ? '已使用' : '可用';
+    html += `
+      <div class="coupon-item ${usedClass}">
+        <div class="coupon-item-left">
+          <div class="coupon-item-value">¥${c.value}<span>元</span></div>
+          <div class="coupon-item-info">
+            <div>随机面值券</div>
+            <div>领取时间：${formatDate(c.time)}</div>
+          </div>
+        </div>
+        <div class="coupon-item-tag ${tagClass}">${tagText}</div>
+      </div>
+    `;
+  });
+  list.innerHTML = html;
+}
+
+function claimCoupon(){
+  if(!canClaimCoupon()) return;
+  const value = randomCouponValue();
+  coupons.push({
+    id: Date.now(),
+    value: value,
+    time: Date.now(),
+    used: false
+  });
+  lastCouponTime = Date.now();
+  saveAccount();
+  updateUserUI();
+  updateCouponUI();
+  updateCouponBadge();
+  renderCouponList();
+  const btn = document.getElementById('claimBtn');
+  btn.innerText = `领取成功！¥${value}元`;
+  setTimeout(() => {
+    updateCouponUI();
+  }, 1500);
+}
+
+function updateCountdown(){
+  const el = document.getElementById('couponNextTime');
+  if(canClaimCoupon()){
+    el.innerText = "🎁 有新券可以领取啦！";
+    return;
+  }
+  let remain = COUPON_INTERVAL - (Date.now() - lastCouponTime);
+  if(remain < 0) remain = 0;
+  let hours = Math.floor(remain / 3600000);
+  let mins = Math.floor((remain % 3600000) / 60000);
+  let secs = Math.floor((remain % 60000) / 1000);
+  let timeStr = `${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+  el.innerText = `距离下一张还有：${timeStr}`;
+}
+
+function startCouponTimer(){
+  if(couponTimer) clearInterval(couponTimer);
+  couponTimer = setInterval(() => {
+    if(isGuest) return;
+    updateCountdown();
+    if(canClaimCoupon()){
+      const btn = document.getElementById('claimBtn');
+      if(btn && btn.disabled){
+        updateCouponBadge();
+        if(document.getElementById('couponModal').style.display === 'flex'){
+          updateCouponUI();
+        }
+        const lastCouponMsg = messages.find(m => m.type === 'coupon');
+        const shouldNotify = !lastCouponMsg || (Date.now() - lastCouponMsg.time >= COUPON_INTERVAL);
+        if(shouldNotify){
+          addMessage('coupon', '新优惠券到账', '系统已发放新的优惠券，面值随机，快去领取吧~');
+        }
+      }
+    }
+  }, 1000);
+}
+
+// ===== 支付弹窗 - 优惠券选择 =====
+function openPayModal(){
+  let count = 0;
+  document.querySelectorAll('.goods-row input').forEach(i=>{
+    if(i.value.trim()) count++;
+  })
+  currentOrderTotal = count * 14.5;
+  
+  if(count === 0){
+    alert("请先添加商品！");
+    return;
+  }
+  
+  selectedCouponId = null;
+  document.getElementById('payPwd').value = '';
+  
+  updatePayPrice();
+  
+  const couponSection = document.getElementById('payCouponSection');
+  if(!isGuest){
+    const availCoupons = getAvailableCoupons();
+    document.getElementById('payCouponCount').innerText = `${availCoupons.length}张可用`;
+    renderPayCouponList();
+    couponSection.style.display = 'block';
+  } else {
+    couponSection.style.display = 'none';
+  }
+  
+  document.getElementById('payModal').style.display = 'flex';
+}
+
+function closePayModal(){
+  document.getElementById('payModal').style.display = 'none';
+}
+
+function renderPayCouponList(){
+  const list = document.getElementById('payCouponList');
+  const availCoupons = getAvailableCoupons();
+  
+  if(availCoupons.length === 0){
+    list.innerHTML = '<div class="no-coupon-tip">暂无可用优惠券</div>';
+    return;
+  }
+  
+  let html = '';
+  const sorted = [...availCoupons].sort((a,b) => b.value - a.value);
+  sorted.forEach(c => {
+    const selected = c.id === selectedCouponId ? 'selected' : '';
+    const disabled = c.value > currentOrderTotal ? 'disabled' : '';
+    html += `
+      <div class="pay-coupon-item ${selected} ${disabled}" onclick="selectPayCoupon(${c.id}, ${c.value})">
+        <div>
+          <div class="coupon-value">¥${c.value}<span>元</span></div>
+          <div class="coupon-info">随机面值券 · ${formatDate(c.time)}</div>
+        </div>
+        <div class="coupon-check"></div>
+      </div>
+    `;
+  });
+  list.innerHTML = html;
+}
+
+function selectPayCoupon(id, value){
+  if(value > currentOrderTotal){
+    alert("该优惠券面值大于订单金额，无法使用");
+    return;
+  }
+  if(selectedCouponId === id){
+    selectedCouponId = null;
+  } else {
+    selectedCouponId = id;
+  }
+  renderPayCouponList();
+  updatePayPrice();
+}
+
+function updatePayPrice(){
+  document.getElementById('payOriginPrice').innerText = `¥${currentOrderTotal.toFixed(2)}`;
+  
+  const discountLine = document.getElementById('payDiscountLine');
+  let finalPrice = currentOrderTotal;
+  
+  if(selectedCouponId){
+    const coupon = coupons.find(c => c.id === selectedCouponId);
+    if(coupon){
+      discountLine.style.display = 'flex';
+      document.getElementById('payDiscount').innerText = `-¥${coupon.value.toFixed(2)}`;
+      finalPrice = currentOrderTotal - coupon.value;
+      if(finalPrice < 0) finalPrice = 0;
+    }
+  } else {
+    discountLine.style.display = 'none';
+  }
+  
+  document.getElementById('payFinalPrice').innerText = `¥${finalPrice.toFixed(2)}`;
+}
+
+// ===== 支付确认 =====
+function payOk(){
+  const pwd = document.getElementById('payPwd').value.trim();
+  if(!pwd) return alert("请输入支付密码");
+  
+  let finalPrice = currentOrderTotal;
+  let usedCouponValue = 0;
+  
+  if(selectedCouponId && !isGuest){
+    const coupon = coupons.find(c => c.id === selectedCouponId);
+    if(coupon){
+      coupon.used = true;
+      usedCouponValue = coupon.value;
+      finalPrice = currentOrderTotal - coupon.value;
+      if(finalPrice < 0) finalPrice = 0;
+    }
+  }
+  
+  if(!isGuest){
+    integral +=5;
+    logList.push("订单结算 +5积分");
+    let msg = `您的订单已支付成功，实付¥${finalPrice.toFixed(2)}`;
+    if(usedCouponValue > 0){
+      msg += `，使用优惠券抵扣¥${usedCouponValue.toFixed(2)}`;
+    }
+    msg += '，积分+5，感谢您的购买！';
+    addMessage('system', '订单支付成功', msg);
+    saveAccount();
+  }
+  
+  document.getElementById('integralNum').innerText = integral;
+  document.getElementById('homeIntegralNum').innerText = integral;
+  updateUserUI();
+  
+  let detail = `实付金额：¥${finalPrice.toFixed(2)}`;
+  if(usedCouponValue > 0){
+    detail += `（已用券抵扣¥${usedCouponValue.toFixed(2)}）`;
+  }
+  document.getElementById('successDetail').innerText = detail;
+  
+  document.getElementById('payModal').style.display = 'none';
+  document.getElementById('successModal').style.display = 'flex';
+}
+function closeSuccess(){
+  document.getElementById('successModal').style.display = 'none';
+  backLogin();
+}
+
+// ===== 消息中心 =====
+function openMsgCenter(){
+  if(isGuest){
+    alert("游客无法查看消息");
+    return;
+  }
+  if(document.getElementById('userHomeModal').style.display === 'flex'){
+    document.getElementById('userHomeModal').style.display = 'none';
+    document.getElementById('msgModal').dataset.fromHome = 'true';
+  } else {
+    document.getElementById('msgModal').dataset.fromHome = 'false';
+  }
+  renderMsgList();
+  document.getElementById('msgModal').style.display = 'flex';
+}
+
+function closeMsgCenter(){
+  document.getElementById('msgModal').style.display = 'none';
+  let fromHome = document.getElementById('msgModal').dataset.fromHome === 'true';
+  if(fromHome){
+    document.getElementById('userHomeModal').style.display = 'flex';
+  }
+}
+
+function renderMsgList(){
+  const list = document.getElementById('msgList');
+  if(messages.length === 0){
+    list.innerHTML = '<div class="msg-empty">暂无消息</div>';
+    return;
+  }
+  let html = '';
+  messages.forEach((msg, idx) => {
+    let tagClass = 'tag-system';
+    let tagText = '系统';
+    if(msg.type === 'coupon'){ tagClass = 'tag-coupon'; tagText = '优惠券'; }
+    if(msg.type === 'private'){ tagClass = 'tag-private'; tagText = '私信'; }
+    
+    const readClass = msg.read ? '' : 'unread';
+    const fromText = msg.type === 'private' ? `来自 ${msg.fromName || msg.from}` : '';
+    
+    html += `
+      <div class="msg-item ${readClass}" onclick="readMessage(${idx})">
+        <div class="msg-item-top">
+          <div class="msg-item-title">
+            <span class="msg-item-tag ${tagClass}">${tagText}</span>
+            ${msg.title}
+          </div>
+          <div class="msg-item-time">${formatTime(msg.time)}</div>
+        </div>
+        <div class="msg-item-content">${msg.content}${fromText ? '<br><span style="color:#64748b;font-size:11px;margin-top:4px;display:inline-block;">'+fromText+'</span>' : ''}</div>
+      </div>
+    `;
+  });
+  list.innerHTML = html;
+  updateMsgBadge();
+}
+
+function readMessage(idx){
+  if(messages[idx] && !messages[idx].read){
+    messages[idx].read = true;
+    saveAccount();
+    renderMsgList();
+  }
+}
+
+function markAllRead(){
+  messages.forEach(m => m.read = true);
+  saveAccount();
+  renderMsgList();
+  updateMsgBadge();
+}
+
+// ===== 发消息 =====
+function openSendMsg(){
+  if(isGuest){
+    alert("游客无法发送私信");
+    return;
+  }
+  document.getElementById('userHomeModal').style.display = 'none';
+  document.getElementById('sendMsgModal').dataset.fromHome = 'true';
+  document.getElementById('targetPhone').value = '';
+  document.getElementById('msgContent').value = '';
+  document.getElementById('sendMsgModal').style.display = 'flex';
+}
+
+function openSendMsgFromMsg(){
+  document.getElementById('msgModal').style.display = 'none';
+  document.getElementById('sendMsgModal').dataset.fromMsg = 'true';
+  document.getElementById('targetPhone').value = '';
+  document.getElementById('msgContent').value = '';
+  document.getElementById('sendMsgModal').style.display = 'flex';
+}
+
+function closeSendMsg(){
+  document.getElementById('sendMsgModal').style.display = 'none';
+  let fromHome = document.getElementById('sendMsgModal').dataset.fromHome === 'true';
+  let fromMsg = document.getElementById('sendMsgModal').dataset.fromMsg === 'true';
+  if(fromMsg){
+    document.getElementById('msgModal').style.display = 'flex';
+  } else if(fromHome){
+    document.getElementById('userHomeModal').style.display = 'flex';
+  }
+}
+
+function sendMessage(){
+  const targetPhone = document.getElementById('targetPhone').value.trim();
+  const content = document.getElementById('msgContent').value.trim();
+  
+  if(!targetPhone){
+    alert("请输入对方手机号");
+    return;
+  }
+  if(!content){
+    alert("请输入消息内容");
+    return;
+  }
+  if(targetPhone === currentPhone){
+    alert("不能给自己发消息哦");
+    return;
+  }
+  
+  let accounts = getAccounts();
+  if(!accounts[targetPhone]){
+    alert("该手机号尚未注册，无法发送");
+    return;
+  }
+  
+  if(!Array.isArray(accounts[targetPhone].messages)){
+    accounts[targetPhone].messages = [];
+  }
+  accounts[targetPhone].messages.unshift({
+    id: Date.now() + Math.random(),
+    type: 'private',
+    title: '收到新私信',
+    content: content,
+    from: currentPhone,
+    fromName: userName,
+    time: Date.now(),
+    read: false
+  });
+  localStorage.setItem('liquidShopAccounts', JSON.stringify(accounts));
+  
+  alert("发送成功！");
+  closeSendMsg();
+}
+
+// ===== 开关切换 =====
+function toggleSwitch(item){
+  const sw = item.querySelector('.switch');
+  sw.classList.toggle('on');
+  if(sw.id === 'notifySwitch'){
+    notifyEnabled = sw.classList.contains('on');
+    saveAccount();
+  }
+}
+
+// ===== 商品相关 =====
+function addRow(){
+  const box = document.getElementById('goodsBox');
+  const index = box.children.length + 1;
+  const div = document.createElement('div');
+  div.className = "goods-row";
+  div.innerHTML = `<input class="clickable" placeholder="商品${index}"><button class="del-btn clickable" onclick="delRow(this)">删除</button>`
+  box.appendChild(div);
+  calcPrice();
+}
+function delRow(btn){
+  btn.parentElement.remove();
+  calcPrice();
+}
+function clearAllInput(){
+  document.querySelectorAll('.goods-row input').forEach(i=>i.value='');
+  calcPrice();
+}
+function calcPrice(){
+  let count = 0;
+  document.querySelectorAll('.goods-row input').forEach(i=>{
+    if(i.value.trim()) count++;
+  })
+  const total = (count * 14.5).toFixed(2);
+  document.getElementById('totalShow').innerHTML = `<strong>总价：</strong>${total}元，共${count}件`;
+}
+
+// ===== 退出登录 =====
+function backLogin(){
+  saveAccount();
+  if(couponTimer) { clearInterval(couponTimer); couponTimer = null; }
+  isGuest = false;
+  integral = 0;
+  logList = [];
+  currentPhone = "";
+  coupons = [];
+  lastCouponTime = 0;
+  messages = [];
+  selectedCouponId = null;
+  currentOrderTotal = 0;
+  document.getElementById('userHomeModal').style.display = 'none';
+  document.getElementById('aboutModal').style.display = 'none';
+  document.getElementById('couponModal').style.display = 'none';
+  document.getElementById('msgModal').style.display = 'none';
+  document.getElementById('sendMsgModal').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+  document.getElementById('phoneIn').value = '';
+  document.getElementById('pwdIn').value = '';
+  document.getElementById('codeIn').value = '';
+  document.querySelectorAll('.goods-row input').forEach(i=>i.value='');
+  document.getElementById('totalShow').innerHTML = "<strong>总价：</strong>0.00元";
+}
+
+// ===== 修改昵称 =====
+function openEditName(){
+  if(isGuest) return alert("游客无法修改资料");
+  document.getElementById('userHomeModal').style.display = 'none';
+  document.getElementById('nameModal').style.display = 'flex';
+  document.getElementById('newName').value = '';
+}
+function closeNameModal(){
+  document.getElementById('nameModal').style.display = 'none';
+  document.getElementById('userHomeModal').style.display = 'flex';
+}
+function saveName(){
+  let n = document.getElementById('newName').value.trim();
+  if(!n) return alert("昵称不能为空");
+  userName = n;
+  updateUserUI();
+  saveAccount();
+  document.getElementById('nameModal').style.display = 'none';
+  document.getElementById('userHomeModal').style.display = 'flex';
+}
+
+// ===== 修改密码 =====
+function openEditPwd(){
+  if(isGuest) return alert("游客无登录密码");
+  document.getElementById('userHomeModal').style.display = 'none';
+  document.getElementById('pwdModal').style.display = 'flex';
+  document.getElementById('oldPwd').value = '';
+  document.getElementById('newPwd').value = '';
+}
+function closePwdModal(){
+  document.getElementById('pwdModal').style.display = 'none';
+  document.getElementById('userHomeModal').style.display = 'flex';
+}
+function savePwd(){
+  let old = document.getElementById('oldPwd').value.trim();
+  let newP = document.getElementById('newPwd').value.trim();
+  if(old !== originPwd) return alert("原密码错误");
+  originPwd = newP;
+  saveAccount();
+  alert("修改成功");
+  document.getElementById('pwdModal').style.display = 'none';
+  document.getElementById('userHomeModal').style.display = 'flex';
+}
+
+// ===== 积分记录 =====
+function openLog(){
+  if(isGuest) return alert("游客无积分记录");
+  document.getElementById('logContent').innerHTML = logList.join('<br>') || "暂无记录";
+  document.getElementById('logModal').style.display = 'flex';
+}
+function closeLog(){
+  document.getElementById('logModal').style.display = 'none';
+}
+
+// ===== 页面加载时初始化验证码登录隐藏 =====
+window.onload = function(){
+  document.getElementById('codeInputWrap').style.display = 'none';
 }
 </script>
 </body>
