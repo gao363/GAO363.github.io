@@ -547,7 +547,6 @@ input::placeholder {
   cursor:pointer;
 }
 
-/* 个人中心弹窗样式 */
 .center-modal {
   display: none;
   position: fixed;
@@ -732,7 +731,6 @@ input::placeholder {
   </div>
 </div>
 
-<!-- 个人中心弹窗，完整功能菜单 -->
 <div class="center-modal" id="userCenterModal">
   <div class="center-content glass-liquid">
     <div class="center-head-info">
@@ -757,4 +755,146 @@ input::placeholder {
 </div>
 
 <div class="modal-box" id="modalUser">
-  <div class
+  <div class="modal-inner glass-liquid">
+    <h2 id="modalTitle">弹窗标题</h2>
+    <div id="modalText"></div>
+    <div class="modal-close">
+      <button onclick="closeModal()">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// 全局购物车数组
+let cartList = [];
+// 切换登录注册标签
+const tabLogin = document.getElementById('tabLogin');
+const tabReg = document.getElementById('tabReg');
+const loginForm = document.getElementById('loginForm');
+const regForm = document.getElementById('regForm');
+tabLogin.onclick = ()=>{
+  tabLogin.classList.add('active');
+  tabReg.classList.remove('active');
+  loginForm.style.display = 'block';
+  regForm.style.display = 'none';
+}
+tabReg.onclick = ()=>{
+  tabReg.classList.add('active');
+  tabLogin.classList.remove('active');
+  regForm.style.display = 'block';
+  loginForm.style.display = 'none';
+}
+
+// 游客登录，进入后台
+document.getElementById('guestBtn').onclick = function(){
+  document.querySelector('.login-box').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  renderGoods();
+}
+// 登录按钮简易逻辑
+document.getElementById('loginSubmit').onclick = function(){
+  let user = document.getElementById('loginUser').value;
+  if(!user){
+    alert('请输入账号');
+    return;
+  }
+  document.getElementById('showName').innerText = user;
+  document.querySelector('.login-box').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  renderGoods();
+}
+// 退出登录
+document.getElementById('logoutBtn').onclick = function(){
+  document.getElementById('adminPanel').style.display = 'none';
+  document.querySelector('.login-box').style.display = 'flex';
+}
+
+// 渲染商品列表
+function renderGoods(){
+  const box = document.getElementById('goodsBox');
+  box.innerHTML = '';
+  if(cartList.length === 0){
+    box.innerHTML = '<p style="color:#94a3b8;margin:10px 0">购物车暂无商品，点击新增商品添加条目</p>';
+    return;
+  }
+  cartList.forEach((item,idx)=>{
+    let div = document.createElement('div');
+    div.className = 'goods-row';
+    div.innerHTML = `
+      <input placeholder="商品名称" value="${item.name}">
+      <input placeholder="单价" value="${item.price}">
+      <input placeholder="数量" value="${item.num}">
+      <button class="del-btn" onclick="delGoods(${idx})">删除</button>
+    `;
+    box.appendChild(div);
+  })
+}
+// 新增商品
+document.getElementById('addGoods').onclick = function(){
+  cartList.push({name:'',price:0,num:1});
+  renderGoods();
+}
+// 删除商品
+function delGoods(index){
+  cartList.splice(index,1);
+  renderGoods();
+}
+// 清空购物车
+document.getElementById('clearCart').onclick = function(){
+  cartList = [];
+  renderGoods();
+  alert('购物车已全部清空');
+}
+
+// 统计库存总额（修复点：原本空白无逻辑）
+function calcStock(){
+  let total = 0;
+  cartList.forEach(item=>{
+    total += Number(item.price) * Number(item.num);
+  })
+  openModal('库存统计结果',`当前所有商品库存总价：${total} 元\n商品总种类：${cartList.length}件`);
+}
+// 结算结账（修复点：点击无反应）
+function checkoutPay(){
+  if(cartList.length === 0){
+    alert('购物车为空，无法结算');
+    return;
+  }
+  let sum = 0;
+  cartList.forEach(i=>sum+=i.price*i.num);
+  openModal('订单结算',`订单总金额：${sum} 元\n确认提交结算订单`);
+}
+// 操作日志弹窗
+function showLog(){
+  openModal('操作日志','1. 进入系统\n2. 新增/删除商品\n3. 库存统计\n4. 订单结算\n5. 清空购物车\n所有临时操作仅本地生效，刷新页面数据重置');
+}
+
+// 弹窗公共方法
+function openModal(title,text){
+  document.getElementById('modalTitle').innerText = title;
+  document.getElementById('modalText').innerText = text;
+  document.getElementById('modalUser').style.display = 'block';
+}
+function closeModal(){
+  document.getElementById('modalUser').style.display = 'none';
+}
+// 个人中心
+document.getElementById('avatarClick').onclick = function(){
+  document.getElementById('userCenterModal').style.display = 'block';
+}
+function closeCenter(){
+  document.getElementById('userCenterModal').style.display = 'none';
+}
+function tip(msg){
+  alert(msg);
+}
+// 协议弹窗占位
+function openUserAgreement(){
+  openModal('用户协议','这里填充协议文本');
+}
+function openPrivacy(){
+  openModal('隐私政策','这里填充隐私政策文本');
+}
+</script>
+</body>
+</html>
